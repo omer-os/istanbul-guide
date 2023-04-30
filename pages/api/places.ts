@@ -11,7 +11,7 @@ type Place = {
   places: {
     name: string;
     description: string;
-    image: string;
+    images: string[];
     slug: string;
     showInMap: string;
     coverImage: string;

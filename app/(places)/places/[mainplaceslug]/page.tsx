@@ -1,18 +1,26 @@
 import PlaceCard from "components/components/ui/cards/PlaceCard";
 import Imagecarousel from "components/components/ui/imagecarousels/imagecarousel";
-import { getPlaceBySlug } from "components/pages/api/places";
+import { getMainLocations, getPlaceBySlug } from "components/pages/api/places";
 import Link from "next/link";
 import React from "react";
 import { HiLocationMarker } from "react-icons/hi";
+
+export function generateStaticParams() {
+  const places = getMainLocations();
+
+  return places.map((place) => ({
+    mainplaceslug: place.slug,
+  }));
+}
 
 export default function page({
   params,
 }: {
   params: {
-    slug: string;
+    mainplaceslug: string;
   };
 }) {
-  const place = getPlaceBySlug(params.slug);
+  const place = getPlaceBySlug(params.mainplaceslug);
 
   return (
     <div>
@@ -39,8 +47,9 @@ export default function page({
 
         <div className="text-xl mt-6 font-bold">places</div>
         <div className="mt-3 flex flex-col gap-3">
-          {place?.places.map((place) => (
+          {place?.places.map((place, index) => (
             <PlaceCard
+              key={place.slug + index}
               image={place.coverImage}
               link={`/places/${place.slug}/${place.slug}`}
               name={place.name}

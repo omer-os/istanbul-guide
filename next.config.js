@@ -4,10 +4,11 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: [
-      "images.unsplash.com",
-      "avatars.githubusercontent.com",
-      "i.ibb.co",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
 };

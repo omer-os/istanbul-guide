@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { motion } from "framer-motion";
+import { BASEURL } from "components/lib/BASEURL";
 
 export default function MainNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,9 @@ export default function MainNav() {
       }
     };
     window.addEventListener("scroll", handleScroll);
+    console.log(BASEURL);
     return () => window.removeEventListener("scroll", handleScroll);
+
   }, []);
 
   return (
