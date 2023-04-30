@@ -15,11 +15,11 @@ export default function PlaceCard(props: Props) {
       className="relative h-[13em] w-full rounded-xl flex flex-col justify-end text-white p-4 overflow-hidden group"
     >
       <div className="img absolute w-full h-full top-0 left-0">
-        <img
-          src={props.image}
-          alt=""
-          className="w-full brightness-75 h-full object-cover group-hover:brightness-50  object-center group-hover:scale-110 transition-all"
-        />
+          <img
+            src={props.image}
+            alt=""
+            className="w-full brightness-75 h-full object-cover group-hover:brightness-50  object-center group-hover:scale-110 transition-all"
+          />
       </div>
 
       <div className="flex flex-col relative z-10">

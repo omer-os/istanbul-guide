@@ -8,8 +8,9 @@ export const DB_places = [
     description:
       "Fatih is a district of Istanbul, Turkey, that encompasses the peninsula coinciding with historic Constantinople. In 2009, the district of Eminönü, which had been a separate municipality located at the tip of the peninsula, was merged into Fatih because of the small population of Eminönü.",
     images: [
+      "https://lh5.googleusercontent.com/p/AF1QipMThKoS9pXunvfpkSDnkJP70Dt2fSAE1y-Jaqm8=w408-h544-k-no",
       "https://lh5.googleusercontent.com/p/AF1QipPj1VCZtRpOxqoL57Qm18AXD7gm8Bbk7qdAT5m5=w408-h725-k-no",
-      "https://lh5.googleusercontent.com/p/AF1QipPj1VCZtRpOxqoL57Qm18AXD7gm8Bbk7qdAT5m5=w408-h725-k-no",
+      "https://i.pinimg.com/564x/48/2f/df/482fdfb8e33f7233e18ffd277306e87e.jpg",
     ],
     places: [
       {
