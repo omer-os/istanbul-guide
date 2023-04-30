@@ -8,9 +8,17 @@ type Place = {
   slug: string;
   images: string[];
   onGoogleMaps: string;
+  places: {
+    name: string;
+    description: string;
+    image: string;
+    slug: string;
+    showInMap: string;
+    coverImage: string;
+  }[];
 };
 
-export function getMainLocations(): Place[] {
+export function getMainLocations() {
   return DB_places.map((place) => ({
     name: place.name,
     description: place.description,

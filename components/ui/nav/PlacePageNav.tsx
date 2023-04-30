@@ -23,9 +23,9 @@ export default function PlacePageNav() {
       <nav
         className={`
 flex py-5 px-4 justify-between items-center
-transition-all
+ transition-all
 
-${scrolled ? "bg-white text-black" : "bg-transparent text-white"}
+${scrolled ? "bg-white text-black shadow-xl" : "bg-transparent text-white"}
 
       `}
       >
