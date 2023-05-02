@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { motion } from "framer-motion";
 import { BASEURL } from "components/lib/BASEURL";
+import SideBar from "./SideBar";
 
 export default function MainNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,9 +17,7 @@ export default function MainNav() {
       }
     };
     window.addEventListener("scroll", handleScroll);
-    console.log(BASEURL);
     return () => window.removeEventListener("scroll", handleScroll);
-
   }, []);
 
   return (
@@ -34,9 +33,7 @@ export default function MainNav() {
           paddingTop: scrolled ? "1em" : "2.5em",
         }}
       >
-        <div className="font-bold">
-          <HiMenuAlt2 size={25} />
-        </div>
+       <SideBar/>
       </nav>
     </header>
   );

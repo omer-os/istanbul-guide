@@ -1,23 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { DB_places } from "components/lib/db";
 
-type Place = {
-  name: string;
-  description: string;
-  image: string;
-  slug: string;
-  images: string[];
-  onGoogleMaps: string;
-  places: {
-    name: string;
-    description: string;
-    images: string[];
-    slug: string;
-    showInMap: string;
-    coverImage: string;
-  }[];
-};
-
 export function getMainLocations() {
   return DB_places.map((place) => ({
     name: place.name,
@@ -29,7 +12,7 @@ export function getMainLocations() {
   }));
 }
 
-export function getPlaceBySlug(slug: string): Place | undefined {
+export function getPlaceBySlug(slug: string) {
   return DB_places.find((place) => place.slug === slug);
 }
 

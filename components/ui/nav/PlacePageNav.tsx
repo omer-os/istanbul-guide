@@ -29,7 +29,10 @@ ${scrolled ? "bg-white text-black shadow-xl" : "bg-transparent text-white"}
 
       `}
       >
-        <Link href="/" className="left">
+        <Link
+          href="/"
+          className="w-10 h-10 rounded-full hover:bg-black/10 flex items-center justify-center  -ml-2 active:scale-90 transition-all"
+        >
           <IoIosArrowBack size={30} />
         </Link>
       </nav>

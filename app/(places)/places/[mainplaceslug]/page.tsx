@@ -1,33 +1,124 @@
 import PlaceCard from "components/components/ui/cards/PlaceCard";
 import Imagecarousel from "components/components/ui/imagecarousels/imagecarousel";
-import { getMainLocations, getPlaceBySlug } from "components/pages/api/places";
+import { sanityClient } from "components/lib/SanityClient";
+// import { getMainLocations, getPlaceBySlug } from "components/pages/api/places";
+import { groq } from "next-sanity";
 import Link from "next/link";
 import React from "react";
 import { HiLocationMarker } from "react-icons/hi";
 
-export function generateStaticParams() {
-  const places = getMainLocations();
+export async function generateStaticParams() {
 
-  return places.map((place) => ({
-    mainplaceslug: place.slug,
-  }));
+  const query = groq`
+    *[_type=="location"]{
+      slug{current}
+    }
+  `;
+  const places2 = await sanityClient.fetch(query);
+
+  return places2.map(
+    (place: {
+      slug: {
+        current: string;
+      };
+    }) => ({
+      mainplaceslug: place.slug.current,
+    })
+  );
 }
 
-export default function page({
+type SanityLocationResult = {
+  images: {
+    asset: {
+      url: string;
+    };
+  }[];
+  places: {
+    name: string;
+    description: string;
+    slug: {
+      current: string;
+    };
+    onGoogleMaps: string;
+    coverImage: {
+      asset: {
+        url: string;
+      };
+    };
+    images: {
+      asset: {
+        url: string;
+      };
+    }[];
+  }[];
+  name: string;
+  description: string;
+  slug: {
+    current: string;
+  };
+  coverImage: {
+    asset: {
+      url: string;
+    };
+  };
+  onGoogleMaps: string;
+};
+
+export default async function page({
   params,
 }: {
   params: {
     mainplaceslug: string;
   };
 }) {
-  const place = getPlaceBySlug(params.mainplaceslug);
+
+  const query = groq`*[_type=="location" && slug.current=="${params.mainplaceslug}"]{
+    name,
+    description,
+    slug{
+      current
+    },
+    onGoogleMaps,
+    coverImage{
+      asset->{
+        url
+      }
+    },
+    images[]{
+      asset->{
+        url
+      }
+    },
+    "places": *[_type == "place" && references(^._id)]{
+      name,
+      description,
+      slug{
+        current
+      },
+      onGoogleMaps,
+      coverImage{
+        asset->{
+          url
+        }
+      },
+      images[]{
+        asset->{
+          url
+        }
+      }
+    }
+
+  }[0]  
+  `;
+
+  const place: SanityLocationResult = await sanityClient.fetch(query);
 
   return (
     <div>
       <div className="img h-[40vh] animate-in fade-in">
         <Imagecarousel
           className="w-full overflow-hidden rounded-b-2xl h-full"
-          images={place?.images || [""]}
+          images={place?.images.map((i) => i.asset.url)}
         />
       </div>
 
@@ -49,9 +140,9 @@ export default function page({
         <div className="mt-3 flex flex-col gap-3">
           {place?.places.map((place, index) => (
             <PlaceCard
-              key={place.slug + index}
-              image={place.coverImage}
-              link={`/places/${place.slug}/${place.slug}`}
+              key={place.slug.current + index}
+              image={place.coverImage.asset.url}
+              link={`/places/${place.slug.current}/${place.slug.current}`}
               name={place.name}
             />
           ))}
