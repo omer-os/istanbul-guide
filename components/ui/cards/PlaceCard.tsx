@@ -6,13 +6,16 @@ interface Props {
   name?: string;
   description?: string;
   image: string;
-  link: string;
+  link?: string;
 }
 
+
 export default function PlaceCard(props: Props) {
+  const CardElement = props.link ? Link : "div";
+
   return (
-    <Link
-      href={props.link}
+    <CardElement
+      href={props.link || ""}
       className="relative h-[13em] w-full rounded-xl flex flex-col justify-end text-white p-4 overflow-hidden group"
     >
       <div className="img absolute w-full h-full top-0 left-0">
@@ -33,6 +36,6 @@ export default function PlaceCard(props: Props) {
           {props.description}
         </div>
       </div>
-    </Link>
+    </CardElement>
   );
 }

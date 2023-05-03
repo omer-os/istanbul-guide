@@ -8,7 +8,6 @@ import React from "react";
 import { HiLocationMarker } from "react-icons/hi";
 
 export async function generateStaticParams() {
-
   const query = groq`
     *[_type=="location"]{
       slug{current}
@@ -26,6 +25,7 @@ export async function generateStaticParams() {
     })
   );
 }
+
 
 type SanityLocationResult = {
   images: {
@@ -71,7 +71,6 @@ export default async function page({
     mainplaceslug: string;
   };
 }) {
-
   const query = groq`*[_type=="location" && slug.current=="${params.mainplaceslug}"]{
     name,
     description,
@@ -118,7 +117,7 @@ export default async function page({
       <div className="img h-[40vh] animate-in fade-in">
         <Imagecarousel
           className="w-full overflow-hidden rounded-b-2xl h-full"
-          images={place?.images.map((i) => i.asset.url)}
+          images={place?.images.map((i) => i.asset?.url)}
         />
       </div>
 
@@ -133,7 +132,7 @@ export default async function page({
           </Link>
         </div>
 
-        <div className="text-2xl mt-3 font-bold">{place?.name}</div>
+        <div className="text-2xl mt-3 font-bold capitalize">{place?.name}</div>
         <div className="mt-4 text-zinc-400">{place?.description}</div>
 
         <div className="text-xl mt-6 font-bold">places</div>
@@ -151,3 +150,12 @@ export default async function page({
     </div>
   );
 }
+
+
+
+
+
+
+
+
+

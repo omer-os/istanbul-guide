@@ -10,6 +10,8 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+
+    domains: ["cdn.sanity.io"],
   },
 };
 

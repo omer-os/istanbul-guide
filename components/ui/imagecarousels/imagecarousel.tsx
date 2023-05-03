@@ -13,6 +13,7 @@ export default function Imagecarousel({
 }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
+  const [loading, setLoading] = useState(true);
 
   const SlideImage = (direction: "left" | "right") => {
     setDirection(direction);
@@ -28,7 +29,7 @@ export default function Imagecarousel({
   };
 
   return (
-    <div className={className + " relative w-full h-full"}>
+    <div className={className + " relative w-full h-full bg-zinc-200"}>
       <AnimatePresence mode="popLayout">
         {images.map(
           (i, index) =>
@@ -61,6 +62,7 @@ export default function Imagecarousel({
                   src={i}
                   alt=""
                   className="w-full h-full object-cover object-center"
+                  onLoad={() => setLoading(false)}
                 />
               </motion.div>
             )
